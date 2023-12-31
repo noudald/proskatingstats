@@ -17,3 +17,6 @@ class Skater(models.Model):
     gender = models.CharField(max_length=1, choices=GENDERS)
     country = models.CharField(max_length=2, choices=COUNTRIES)
     birthday = models.DateField()
+
+    def __str__(self):
+        return f'<Skater {self.first_name} {self.last_name}>'
