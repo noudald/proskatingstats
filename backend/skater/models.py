@@ -20,3 +20,12 @@ class Skater(models.Model):
 
     def __str__(self):
         return f'<Skater {self.first_name} {self.last_name}>'
+
+
+class Track(models.Model):
+    name = models.CharField(max_length=20)
+    country = models.CharField(max_length=2, choices=COUNTRIES)
+    city = models.CharFIeld(max_length=50)
+
+    def __str__(self):
+        return f'<Track {self.name} {self.city} {self.country}>'
