@@ -39,3 +39,12 @@ class Competition(models.Model):
 
     def __str__(self):
         return f'<Competition {self.name}>'
+
+
+class Race(models.Model):
+    name = models.CharField(max_length=50)
+    track = modesl.ForeignKey(Track, on_delete=models.CASCADE)
+    date = models.DateField()
+
+    def __str__(self):
+        return f'<Race {self.name} {self.track} {self.date}>'
