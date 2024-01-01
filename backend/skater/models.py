@@ -48,3 +48,23 @@ class Race(models.Model):
 
     def __str__(self):
         return f'<Race {self.name} {self.track} {self.date}>'
+
+
+class Distance(models.Model):
+    distance = models.IntegerField(min=500, max=10000)
+
+    def __str__(self):
+        return f'<Distance {self.distance}>'
+
+
+class RaceResult(models.Model):
+    race = models.ForeignKey(Race)
+    skater = models.ForeignKey(Skater)
+    distance = models.ForeignKey(Distance)
+    time = models.FloatField()
+    result = models.IntegerField(min=1)
+    source = models.CharField(max_length=50)
+    link = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f'<RaceResult {self.skater.first_name} {self.skater.last_name} {self.race.name} {self.distance.distance} {self.result}>'
