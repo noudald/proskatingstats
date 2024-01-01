@@ -25,7 +25,7 @@ class Skater(models.Model):
 class Track(models.Model):
     name = models.CharField(max_length=20)
     country = models.CharField(max_length=2, choices=COUNTRIES)
-    city = models.CharFIeld(max_length=50)
+    city = models.CharField(max_length=50)
 
     def __str__(self):
         return f'<Track {self.name} {self.city} {self.country}>'
@@ -33,7 +33,7 @@ class Track(models.Model):
 
 class Competition(models.Model):
     name = models.CharField(max_length=50)
-    track = modesl.ForeignKey(Track, on_delete=models.CASCADE)
+    track = models.ForeignKey(Track, on_delete=models.CASCADE)
     date_start = models.DateField()
     date_end = models.DateField()
 
@@ -43,7 +43,7 @@ class Competition(models.Model):
 
 class Race(models.Model):
     name = models.CharField(max_length=50)
-    track = modesl.ForeignKey(Track, on_delete=models.CASCADE)
+    track = models.ForeignKey(Track, on_delete=models.CASCADE)
     date = models.DateField()
 
     def __str__(self):
@@ -51,18 +51,18 @@ class Race(models.Model):
 
 
 class Distance(models.Model):
-    distance = models.IntegerField(min=500, max=10000)
+    distance = models.IntegerField()
 
     def __str__(self):
         return f'<Distance {self.distance}>'
 
 
 class RaceResult(models.Model):
-    race = models.ForeignKey(Race)
-    skater = models.ForeignKey(Skater)
-    distance = models.ForeignKey(Distance)
+    race = models.ForeignKey(Race, on_delete=models.CASCADE)
+    skater = models.ForeignKey(Skater, on_delete=models.CASCADE)
+    distance = models.ForeignKey(Distance, on_delete=models.CASCADE)
     time = models.FloatField()
-    result = models.IntegerField(min=1)
+    result = models.IntegerField()
     source = models.CharField(max_length=50)
     link = models.CharField(max_length=200)
 
